@@ -1,4 +1,5 @@
-// PetCareScheduler.java
+
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -83,6 +84,7 @@ public class PetCareScheduler {
 
     private static void loadData() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             pets = (Map<String, Pet>) in.readObject();
         } catch (Exception ignored) {}
     }
